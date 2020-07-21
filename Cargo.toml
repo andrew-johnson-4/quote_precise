@@ -1,6 +1,6 @@
 [package]
 name = "quote_precise"
-version = "0.0.3"
+version = "0.0.4"
 authors = ["Andrew <andrew@subarctic.org>"]
 license = "MIT OR Apache-2.0"
 description = "A quote implementation that preserves meaningful span locations"
