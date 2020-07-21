@@ -34,7 +34,6 @@ pub fn quote_precise(input: proc_macro::TokenStream) -> proc_macro::TokenStream 
    let ts = copy_paste(input);
 
    let output = quote! {
-      use quote::{ToTokens};
       let mut s = proc_macro2::TokenStream::new();
       #ts
       s
