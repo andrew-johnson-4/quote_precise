@@ -1,0 +1,16 @@
+[package]
+name = "quote_precise"
+version = "0.0.1"
+authors = ["Andrew <andrew@subarctic.org>"]
+license = "MIT OR Apache-2.0"
+description = "A quote implementation that preserves meaningful span locations"
+edition = "2018"
+readme = "README.md"
+repository = "https://github.com/andrew-johnson-4/quote_precise"
+keywords = ["procedural","macro","quote"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = { version="1.0", features=["span-locations"] }
