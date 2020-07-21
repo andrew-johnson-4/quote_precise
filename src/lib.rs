@@ -14,7 +14,7 @@ fn copy_paste(ts: TokenStream) -> TokenStream {
          },
          TokenTree::Punct(p) => {
             quote!(
-               let p = proc_macro2::Punct::new('!', Spacing::Joint);
+               let p = proc_macro2::Punct::new('!', proc_macro2::Spacing::Joint);
                s.append(p);
             ).to_tokens(&mut os); 
          }
