@@ -12,8 +12,11 @@ fn copy_paste(ts: TokenStream) -> TokenStream {
          TokenTree::Ident(_i) => {
             quote!().to_tokens(&mut os); 
          },
-         TokenTree::Punct(_p) => {
-            quote!().to_tokens(&mut os); 
+         TokenTree::Punct(p) => {
+            quote!(
+               let p = proc_macro2::Punct::new('!', Spacing::Joint);
+               s.append(p);
+            ).to_tokens(&mut os); 
          }
          TokenTree::Literal(_l) => {
             quote!().to_tokens(&mut os); 
@@ -31,6 +34,7 @@ pub fn quote_precise(input: proc_macro::TokenStream) -> proc_macro::TokenStream 
    let ts = copy_paste(input);
 
    let output = quote! {
+      use quote::{ToTokens};
       let mut s = proc_macro2::TokenStream::new();
       #ts
       s
