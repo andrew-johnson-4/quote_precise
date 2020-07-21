@@ -13,4 +13,10 @@ keywords = ["procedural","macro","quote"]
 proc-macro = true
 
 [dependencies]
+rdxl_internals = "0.0.7"
+quote = "1.0"
 proc-macro2 = { version="1.0", features=["span-locations"] }
+
+[dev-dependencies.syn]
+version = "1.0"
+features = ["full"]
