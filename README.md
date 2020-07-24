@@ -14,3 +14,6 @@ assert_ne!(
    t.span.end()
 )
 ```
+
+Waiting on [proc_macro::Span](https://doc.rust-lang.org/beta/proc_macro/struct.Span.html) to stabilize a bit
+more to see if further work on this crate is not entirely redundant effort.
