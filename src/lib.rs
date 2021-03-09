@@ -1,6 +1,19 @@
-use quote::{quote,ToTokens};
-use proc_macro2::{TokenStream,TokenTree};
+use proc_macro::{TokenStream};
+use quote::{quote};
 
+#[proc_macro]
+pub fn print_precise(input: TokenStream) -> TokenStream {
+    println!("print precise");
+
+    for t in input.into_iter() {
+       println!("{:?}: {:?}", t, t.span());
+    }
+
+    TokenStream::from(quote! {})
+}
+
+/*
+#[proc_macro]
 fn copy_paste(ts: TokenStream) -> TokenStream {
    let mut os = TokenStream::new();
 
@@ -43,3 +56,4 @@ pub fn quote_precise(input: proc_macro::TokenStream) -> proc_macro::TokenStream 
 
    proc_macro::TokenStream::from(output)
 }
+*/
