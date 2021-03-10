@@ -1,6 +1,6 @@
 use proc_macro::{TokenStream};
-use proc_macro2;
-use quote::{quote};
+use proc_macro2::{TokenTree};
+use quote::{quote,ToTokens};
 
 #[proc_macro]
 pub fn print_precise(input: TokenStream) -> TokenStream {
@@ -13,23 +13,24 @@ pub fn print_precise(input: TokenStream) -> TokenStream {
     TokenStream::from(quote! {})
 }
 
-/*
-#[proc_macro]
-fn copy_paste(ts: TokenStream) -> TokenStream {
-   let mut os = TokenStream::new();
+fn copy_paste(ts: proc_macro2::TokenStream) -> proc_macro2::TokenStream {
+   let mut os = proc_macro2::TokenStream::new();
 
    for t in ts.into_iter() {
       match t {
          TokenTree::Group(_g) => {
-            quote!().to_tokens(&mut os); 
+            quote!(()).to_tokens(&mut os); 
          },
          TokenTree::Ident(_i) => {
-            quote!().to_tokens(&mut os); 
+            quote!(a).to_tokens(&mut os); 
          },
          TokenTree::Punct(p) => {
             quote!(
-               let p = proc_macro2::Punct::new('!', proc_macro2::Spacing::Joint);
-               s.append(p);
+               let p = proc_macro2::TokenTree::Punct(
+                  proc_macro2::Punct::new('!', proc_macro2::Spacing::Joint)
+               );
+               //TODO set Span of p
+               s.extend([p].iter().cloned());
             ).to_tokens(&mut os); 
          }
          TokenTree::Literal(_l) => {
@@ -42,8 +43,8 @@ fn copy_paste(ts: TokenStream) -> TokenStream {
 }
 
 #[proc_macro]
-pub fn quote_precise(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
-   let input = TokenStream::from(input);
+pub fn quote_precise(input: TokenStream) -> TokenStream {
+   let input = proc_macro2::TokenStream::from(input);
 
    let ts = copy_paste(input);
 
@@ -55,6 +56,5 @@ pub fn quote_precise(input: proc_macro::TokenStream) -> proc_macro::TokenStream 
       }
    };
 
-   proc_macro::TokenStream::from(output)
+   TokenStream::from(output)
 }
-*/
